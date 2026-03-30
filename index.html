@@ -133,14 +133,19 @@
         <!-- 輸入區域 -->
         <section class="p-4 mt-2 space-y-3">
             <div class="flex flex-col gap-2">
-                <div class="flex gap-2 bg-slate-800 p-1.5 rounded-xl border border-slate-700">
-                    <input id="player-name" type="text" placeholder="新增玩家姓名..." 
-                        class="bg-transparent flex-1 px-3 py-2 text-white outline-none font-bold text-sm">
+                <!-- 優化後的新增玩家區域 -->
+                <div class="flex gap-2 items-center">
+                    <div class="flex-1 bg-slate-800 p-1.5 rounded-xl border border-slate-700 shadow-inner">
+                        <input id="player-name" type="text" placeholder="輸入玩家姓名..." 
+                            onkeydown="if(event.key==='Enter') addPlayer()"
+                            class="bg-transparent w-full px-3 py-2 text-white outline-none font-bold text-sm">
+                    </div>
                     <button onclick="addPlayer()" 
-                        class="bg-red-600 hover:bg-red-500 text-white w-12 h-10 rounded-lg font-black text-xl active:scale-90 transition">
-                        +
+                        class="bg-red-600 hover:bg-red-500 text-white px-5 h-12 rounded-xl font-black text-sm active:scale-95 transition shadow-lg shrink-0">
+                        新增玩家
                     </button>
                 </div>
+
                 <div class="flex items-center gap-2 bg-slate-800/50 p-2 rounded-xl border border-slate-700/50">
                     <label class="text-[10px] font-black text-slate-500 uppercase ml-2">每格費用 $</label>
                     <input id="stake-amount" type="number" value="20" onchange="calculateAndRender()"
@@ -288,9 +293,9 @@
         function render() {
             // 1. 玩家標籤 (移除按鈕在這邊)
             document.getElementById('player-tags').innerHTML = players.map((p, i) => `
-                <div class="flex items-center bg-slate-800 border border-slate-700 px-2 py-1 rounded-lg text-[11px] font-bold shadow-sm">
+                <div class="flex items-center bg-slate-800 border border-slate-700 px-2 py-1 rounded-lg text-[11px] font-bold shadow-sm animate-in fade-in zoom-in duration-200">
                     <span class="text-slate-300">${p.name}</span>
-                    <button onclick="removePlayer(${i})" class="ml-2 text-red-500 font-black w-4 h-4 flex items-center justify-center bg-slate-900 rounded-full hover:bg-red-900 transition">×</button>
+                    <button onclick="removePlayer(${i})" class="ml-2 text-red-500 font-black w-5 h-5 flex items-center justify-center bg-slate-900 rounded-full hover:bg-red-900 transition">×</button>
                 </div>
             `).join('');
 
